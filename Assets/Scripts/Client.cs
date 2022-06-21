@@ -37,7 +37,7 @@ public class Client : MonoBehaviour
 
     public void ConnectToSever()
     {
-
+        tcp.Connect();
     }
 
     public class TCP
