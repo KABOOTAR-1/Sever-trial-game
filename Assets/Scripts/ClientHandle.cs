@@ -11,5 +11,6 @@ public class ClientHandle : MonoBehaviour
 
         Debug.Log($"Message from Server {msg}");
         Client.instance.myId = id;
+        ClientSend.WelcomeReceived();
     }
 }
