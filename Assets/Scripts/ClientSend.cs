@@ -5,13 +5,21 @@ using UnityEngine;
 public class ClientSend : MonoBehaviour
 {
     // Start is called before the first frame update
-  private static void TCPSendData(Packet _packet)
+    private static void TCPSendData(Packet _packet)
     {
         _packet.WriteLength();
         Client.instance.tcp.SendData(_packet);
     }
 
-    #region packet
+    private static void SendUDPData(Packet _packet)
+    {
+        _packet.WriteLength();
+        Client.instance.udp.SendData(_packet);
+    }
+
+    
+        
+        #region packet
     public static void WelcomeReceived()
     {
         using(Packet _packet=new Packet((int)ClientPackets.welcomeReceived))
@@ -23,5 +31,13 @@ public class ClientSend : MonoBehaviour
     }
     #endregion
 
+    public static void UDPTestReceived()
+    {
+        using (Packet _packet = new Packet((int)ClientPackets.udpTestReceive)) 
+        {
+            _packet.Write("Recieved a UDP packet");
+            SendUDPData(_packet);
+        }
+    }
 
 }
