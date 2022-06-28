@@ -31,13 +31,6 @@ public class ClientSend : MonoBehaviour
     }
     #endregion
 
-    public static void UDPTestReceived()
-    {
-        using (Packet _packet = new Packet((int)ClientPackets.udpTestReceive)) 
-        {
-            _packet.Write("Recieved a UDP packet");
-            SendUDPData(_packet);
-        }
-    }
+  
 
 }

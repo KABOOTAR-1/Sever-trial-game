@@ -18,6 +18,7 @@ public class Client : MonoBehaviour
     public UDP udp;
 
     private delegate void packetHandler(Packet _packet);
+
     private static Dictionary<int, packetHandler> packetHandlers;
     private void Awake()
     {
@@ -247,8 +248,7 @@ public class Client : MonoBehaviour
         packetHandlers = new Dictionary<int, packetHandler>() 
         {
             {(int)ServerPackets.welcome,ClientHandle.Welcome },
-            {(int)ServerPackets.udptest,ClientHandle.UDPTest}
-        
+            {(int)ServerPackets.spawnPlayer,ClientHandle.SpawnPlayer }
         };
 
         Debug.Log("Initilized packets"); 

@@ -17,10 +17,13 @@ public class ClientHandle : MonoBehaviour
         Client.instance.udp.Connect(((IPEndPoint)Client.instance.tcp.socket.Client.LocalEndPoint).Port);
     }
 
-    public static void UDPTest(Packet _packet)
+   public static void SpawnPlayer(Packet packet)
     {
-        string str=_packet.ReadString();
-        Debug.Log($" Packet Received via UDP connating msg {str}");
-        ClientSend.UDPTestReceived();
+        int id = packet.ReadInt();
+        string UserName=packet.ReadString();
+        Vector3 position = packet.ReadVector3();
+        Quaternion Rotation = packet.ReadQuaternions();
+
+        GameManager.instance.SpwanPlayer(id, UserName, position, Rotation);
     }
 }
