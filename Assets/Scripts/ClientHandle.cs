@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Net;
+using System;
 
 public class ClientHandle : MonoBehaviour
 {
@@ -25,5 +26,21 @@ public class ClientHandle : MonoBehaviour
         Quaternion Rotation = packet.ReadQuaternions();
 
         GameManager.instance.SpwanPlayer(id, UserName, position, Rotation);
+    }
+
+    internal static void PlayerPosition(Packet _packet)
+    {
+        int _id = _packet.ReadInt();
+        Vector3 position = _packet.ReadVector3();
+
+        GameManager.players[_id].transform.position = position;
+    }
+
+    internal static void PlayerRotation(Packet _packet)
+    {
+        int _id = _packet.ReadInt();
+       Quaternion rotation = _packet.ReadQuaternions();
+
+        GameManager.players[_id].transform.rotation = rotation;
     }
 }
