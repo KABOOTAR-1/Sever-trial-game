@@ -46,17 +46,7 @@ public class Client : MonoBehaviour
         Disconnect();
     }
 
-    private void Disconnect()
-    {
-        if (isConnected)
-        {
-            isConnected = false;
-            tcp.socket.Close();
-            udp.socket.Close();
 
-            Debug.Log("Disconnected");
-        }
-    }
 
     public void ConnectToSever()
     {
@@ -122,6 +112,7 @@ public class Client : MonoBehaviour
                 if (byelength <= 0)
                 {
                     instance.Disconnect();
+                    return;
                 }
 
                 byte[] _data = new byte[byelength];
@@ -130,7 +121,7 @@ public class Client : MonoBehaviour
                 receievedData.Reset(HandleData(_data));
                 stream.BeginRead(receiveBuffer, 0, dataBufferSize, ReceiveCallBack, null);
             }
-            catch (Exception ex)
+            catch 
             {
                 Disconnect();
             }
@@ -242,6 +233,7 @@ public class Client : MonoBehaviour
                 if (data.Length < 4)
                 {
                     instance.Disconnect();
+                    return;
                 }
 
                 HandleData(data);
@@ -292,4 +284,15 @@ public class Client : MonoBehaviour
         Debug.Log("Initilized packets"); 
     }
 
+    private void Disconnect()
+    {
+        if (isConnected)
+        {
+            isConnected = false;
+            tcp.socket.Close();
+            udp.socket.Close();
+
+            Debug.Log("Disconnected");
+        }
+    }
 }

@@ -14,6 +14,7 @@ public class CameraController : MonoBehaviour
 
     private void Start()
     {
+
         verticalRotation = transform.localEulerAngles.x;
         horizontalRotation = player.transform.eulerAngles.y;
     }
@@ -21,10 +22,9 @@ public class CameraController : MonoBehaviour
     private void Update()
     {
        
-        if (Cursor.lockState == CursorLockMode.Locked)
-        {
+
             Look();
-        }
+        
         Debug.DrawRay(transform.position, transform.forward * 2, Color.red);
     }
 
